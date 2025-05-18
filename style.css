@@ -1,145 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 :root {
-  --amount: #ffd700;     /* Gold khas Star Wars */
-  --donator: #00ffff;    /* Cyan */
-  --text: #e0e0e0;
-  --glow-amount: 0 0 12px #ffd700aa;
-  --glow-donator: 0 0 12px #00ffffaa;
-  --glow-text: 0 0 8px #e0e0e0aa;
+    --amount: rgba(223, 168, 102);
+    --donator: rgba(223, 168, 102);
+    --text: #ffffff;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-  color: var(--text);
-}
-
-/* Background gambar */
-.background-img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.25);
-  z-index: -2;
-  user-select: none;
-}
-
-/* Container utama */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 40px;
-  padding: 0 30px;
-  position: relative;
-  z-index: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    max-width: 600px;
+    height: 120px; /* ⬅️ Lebih pendek agar tidak makan tempat */
+    margin: 30px auto;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
 }
 
-/* Karakter kiri & kanan */
-.left-character,
-.right-character {
-  flex-shrink: 0;
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    border-radius: 12px;
+    filter: brightness(0.3);
 }
 
-.left-character img,
-.right-character img {
-  max-height: 75vh;
-  filter: drop-shadow(0 0 20px rgba(0,0,0,0.95));
-  transition: transform 0.3s ease;
+.mascot {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
-.left-character img:hover,
-.right-character img:hover {
-  transform: scale(1.05);
+.mascot img {
+    height: 100px;
+    width: auto;
+    filter: drop-shadow(3px 0 4px rgba(0, 0, 0, 0.8));
 }
 
-/* Box teks donasi */
 .text {
-  background: rgba(0, 0, 0, 0.75);
-  padding: 30px 40px;
-  border-radius: 18px;
-  text-align: center;
-  color: var(--text);
-  text-shadow: 0 0 8px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.2);
-  box-shadow: 0 0 25px #ffd700aa, inset 0 0 15px #00ffff55;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  font-size: 1.4rem;
-  max-width: 600px;
-  opacity: 0;
-  animation: fadeInOut 8s ease-in-out forwards;
-  z-index: 3;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    overflow-wrap: break-word;
 }
 
-/* Elemen-elemen teks */
 .amount {
-  color: var(--amount);
-  font-weight: 900;
-  font-size: 2.2rem;
-  text-shadow: var(--glow-amount);
-  letter-spacing: 0.1em;
+    display: block;
+    color: var(--amount);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
 }
 
 .donator {
-  color: var(--donator);
-  font-weight: 700;
-  font-size: 1.6rem;
-  text-shadow: var(--glow-donator);
+    display: inline-block;
+    color: var(--donator);
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .message {
-  margin-top: 12px;
-  font-style: italic;
-  color: #ccc;
-  text-shadow: var(--glow-text);
-  font-size: 1.2rem;
-}
-
-/* Fade in - fade out */
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  10%, 80% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  .left-character,
-  .right-character {
-    display: none;
-  }
-
-  .text {
-    font-size: 1.1rem;
-    padding: 20px 25px;
-    box-shadow: 0 0 18px #00ffffaa;
-  }
-
-  .amount {
-    font-size: 1.8rem;
-  }
-
-  .donator {
-    font-size: 1.4rem;
-  }
-
-  .message {
-    font-size: 1rem;
-  }
+    display: block;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 3px;
+    color: #ccc;
 }
