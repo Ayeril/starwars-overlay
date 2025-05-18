@@ -57,9 +57,10 @@ body::after { bottom: 0; }
   user-select: none;
 }
 
+/* ⬇️ Perubahan ukuran karakter (Diperbesar dari 60vh menjadi 75vh) */
 .left-character img,
 .right-character img {
-  max-height: 75vh; /* Diperbesar dari 60vh */
+  max-height: 75vh; /* Diperbesar agar lebih dominan */
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.95));
   user-select: none;
   transition: transform 0.3s ease;
