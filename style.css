@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root {
-  --amount: #ffd700;     /* Gold, khas Star Wars */
-  --donator: #00ffff;    /* Cyan neon */
-  --text: #e0e0e0;       /* Lebih soft dari putih murni */
+  --amount: #ffd700;     /* Gold khas Star Wars */
+  --donator: #00ffff;    /* Cyan */
+  --text: #e0e0e0;
   --glow-amount: 0 0 12px #ffd700aa;
   --glow-donator: 0 0 12px #00ffffaa;
   --glow-text: 0 0 8px #e0e0e0aa;
@@ -15,65 +15,44 @@ body, html {
   background: transparent;
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: var(--text);
 }
 
-/* Letterbox effect (opsional) */
-body::before,
-body::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 10vh;
-  background: black;
-  left: 0;
-  z-index: 5;
-}
-
-body::before { top: 0; }
-body::after { bottom: 0; }
-
-.container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
-  align-items: center;
-  justify-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
+/* Background gambar */
 .background-img {
   position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3) contrast(1.1) saturate(1.1); /* Lebih gelap dan kalem */
+  filter: brightness(0.25);
   z-index: -2;
   user-select: none;
 }
 
-/* ⬇️ Perubahan ukuran karakter (Diperbesar dari 60vh menjadi 75vh) */
+/* Container utama */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 40px;
+  padding: 0 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Karakter kiri & kanan */
+.left-character,
+.right-character {
+  flex-shrink: 0;
+}
+
 .left-character img,
 .right-character img {
-  max-height: 75vh; /* Diperbesar agar lebih dominan */
+  max-height: 75vh;
   filter: drop-shadow(0 0 20px rgba(0,0,0,0.95));
-  user-select: none;
   transition: transform 0.3s ease;
-}
-
-.left-character {
-  justify-self: start;
-  margin-left: 40px;
-}
-
-.right-character {
-  justify-self: end;
-  margin-right: 40px;
 }
 
 .left-character img:hover,
@@ -81,63 +60,55 @@ body::after { bottom: 0; }
   transform: scale(1.05);
 }
 
+/* Box teks donasi */
 .text {
-  position: relative;
   background: rgba(0, 0, 0, 0.75);
-  padding: 35px 50px; /* ⬆️ padding diperbesar */
-  border-radius: 20px;
+  padding: 30px 40px;
+  border-radius: 18px;
   text-align: center;
-  z-index: 3;
   color: var(--text);
-  text-shadow:
-    0 0 8px rgba(0,0,0,0.9),
-    0 0 15px rgba(255, 255, 255, 0.2); /* ⬆️ ditingkatkan */
-  max-width: 90vw; /* ⬆️ Lebih panjang agar muat teks panjang */
-  opacity: 0;
-  animation: fadeInOut 8s ease-in-out forwards;
-  box-shadow:
-    0 0 25px #ffd700aa,
-    inset 0 0 15px #00ffff55;
+  text-shadow: 0 0 8px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.2);
+  box-shadow: 0 0 25px #ffd700aa, inset 0 0 15px #00ffff55;
   font-weight: 600;
   letter-spacing: 0.07em;
-  font-size: 1.4rem; /* ⬆️ default size teks utama diperbesar */
-  user-select: none;
+  font-size: 1.4rem;
+  max-width: 600px;
+  opacity: 0;
+  animation: fadeInOut 8s ease-in-out forwards;
+  z-index: 3;
 }
 
+/* Elemen-elemen teks */
 .amount {
   color: var(--amount);
   font-weight: 900;
-  font-size: 2.4rem; /* ⬆️ Ditingkatkan */
+  font-size: 2.2rem;
   text-shadow: var(--glow-amount);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 }
 
 .donator {
   color: var(--donator);
   font-weight: 700;
-  font-size: 1.8rem; /* ⬆️ Ditingkatkan */
+  font-size: 1.6rem;
   text-shadow: var(--glow-donator);
 }
 
 .message {
-  margin-top: 14px;
+  margin-top: 12px;
   font-style: italic;
   color: #ccc;
   text-shadow: var(--glow-text);
-  font-size: 1.3rem; /* ⬆️ Ditingkatkan */
+  font-size: 1.2rem;
 }
 
-
+/* Fade in - fade out */
 @keyframes fadeInOut {
   0% {
     opacity: 0;
     transform: scale(0.95);
   }
-  10% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  80% {
+  10%, 80% {
     opacity: 1;
     transform: scale(1);
   }
@@ -147,24 +118,28 @@ body::after { bottom: 0; }
   }
 }
 
+/* Responsif */
 @media (max-width: 768px) {
+  .left-character,
+  .right-character {
+    display: none;
+  }
+
   .text {
     font-size: 1.1rem;
     padding: 20px 25px;
-    max-width: 95vw;
     box-shadow: 0 0 18px #00ffffaa;
   }
 
   .amount {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .donator {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .message {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
-
